@@ -1,0 +1,26 @@
+﻿#pragma kernel CSMain
+
+uint2 MapDimensions;
+float BaseDepth;
+
+Buffer<uint> PositionBuffer;
+
+RWTexture2D<float4> PositionTexture;
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+	uint i = id.x + id.y * MapDimensions.x;
+	bool odd = i % 2 == 1;
+	uint depth = PositionBuffer[floor(i / 2)];
+	// unpack ushort from uint
+	if (odd) {
+		depth <<= 16;
+	}
+	depth >>= 16;
+	float angle = 0;
+	float3 ray = float3(((float)id.x - (MapDimensions.x / 2)) * 0.5, ((float)id.y - (MapDimensions.y / 2)) * -0.5, BaseDepth);
+	ray *= depth / BaseDepth;
+
+	PositionTexture[id.xy] = float4(ray * 0.001, 1);
+}
