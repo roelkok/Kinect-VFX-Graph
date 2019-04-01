@@ -1,14 +1,19 @@
-﻿#pragma kernel CSMain
+﻿#pragma kernel BakeDepth
+#pragma kernel BakeColor
 
 uint2 MapDimensions;
 float BaseDepth;
 
 Buffer<uint> PositionBuffer;
+Buffer<float2> DepthToColorMap;
+
+Texture2D<float4> ColorSource;
 
 RWTexture2D<float4> PositionTexture;
+RWTexture2D<float4> ColorTexture;
 
 [numthreads(8, 8, 1)]
-void CSMain(uint3 id : SV_DispatchThreadID)
+void BakeDepth(uint3 id : SV_DispatchThreadID)
 {
 	uint i = id.x + id.y * MapDimensions.x;
 	bool odd = i % 2 == 1;
@@ -23,4 +28,13 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 	ray *= depth / BaseDepth;
 
 	PositionTexture[id.xy] = float4(ray * 0.001, 1);
+}
+
+[numthreads(8, 8, 1)]
+void BakeColor(uint3 id : SV_DispatchThreadID) {
+	uint i = id.x + id.y * MapDimensions.x;
+
+	int2 coordinates = (int2)DepthToColorMap[i];
+	float4 color = ColorSource.Load(int3(coordinates, 0));
+	ColorTexture[id.xy] = color;
 }

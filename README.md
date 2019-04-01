@@ -10,10 +10,10 @@ This is an example of how to use the depth camera feed from the Kinect with Unit
 ## How to use
 
 Add the _Kinect VFX_ prefab to your scene. In your VFX Graph, use the _KinectPointCloudMap_ render texture as input for a 'Set Position From Map' node.
+The color data for each depth point is available in the _KinectColorMap_ render texture.
 
-Alternatively you can use the _Kinect VFX Mapped_ prefab instead. This does the same as the _Kinect VFX_ prefab but the internal workings are different. The positional accurancy should be slightly better but I had better performance with the _Kinect VFX_ prefab.
+Alternatively you can use the _Kinect VFX Mapped_ prefab instead. This does also depth mapping like the _Kinect VFX_ prefab but the internal workings are different. The positional accurancy should be slightly better but I had better performance with the _Kinect VFX_ prefab.
 
 ## TODO
 
 - Improve the positional accuracy of the mapped points.
-- Add color stream of Kinect

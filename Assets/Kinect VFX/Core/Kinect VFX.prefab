@@ -45,4 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointCloudMap: {fileID: 8400000, guid: d36f2b172f2031e44aa0783494297c46, type: 2}
   PointCloudBaker: {fileID: 7200000, guid: 577681bc9a2fd5344a17f1d2e89d9821, type: 3}
+  ColorMap: {fileID: 8400000, guid: 229912b72ce87394c882247ef75dc7d1, type: 2}
   ManageSensor: 1
+  UseColor: 1

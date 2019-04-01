@@ -179,6 +179,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2632316419236066232, guid: ff4722f04736a044987e031761a22e8d,
+        type: 3}
+      propertyPath: UseColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632316419236066232, guid: ff4722f04736a044987e031761a22e8d,
+        type: 3}
+      propertyPath: ColorMap
+      value: 
+      objectReference: {fileID: 8400000, guid: 229912b72ce87394c882247ef75dc7d1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4722f04736a044987e031761a22e8d, type: 3}
 --- !u!1 &310254639 stripped
@@ -237,7 +247,10 @@ VisualEffect:
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 4
+        m_Name: MaxDistance
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -251,7 +264,33 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0.02026158
+            outSlope: 0.02026158
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.16923703
+          - serializedVersion: 3
+            time: 0.6878052
+            value: 0.9858475
+            inSlope: 3.5068421
+            outSlope: 3.5068421
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.05573426
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Falloff
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
