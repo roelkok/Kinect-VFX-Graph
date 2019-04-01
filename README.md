@@ -1,5 +1,7 @@
 # Kinect VFX Graph
 
+![kinect-vfx-graph](https://user-images.githubusercontent.com/2318616/54569941-f5623e80-49dc-11e9-8ef6-09e690cb96f9.gif)
+
 This is an example of how to use the depth camera feed from the Kinect with Unity's VFX Graph. The code in this project is heavily inspired by [Rsvfx](https://github.com/keijiro/Rsvfx) by Keijiro Takahashi.
 
 ## Requirements
