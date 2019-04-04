@@ -73,10 +73,12 @@ public class KinectPointCloudMapped : MonoBehaviour
                     positionBuffer = new ComputeBuffer(cameraSpacePoints.Length, sizeof(float) * 3);
                 }
                 positionBuffer.SetData(cameraSpacePoints);
+
+                int kernel = PointCloudBaker.FindKernel("BakeDepth");
                 PointCloudBaker.SetInts("MapDimensions", mapDimensions);
-                PointCloudBaker.SetBuffer(0, "PositionBuffer", positionBuffer);
-                PointCloudBaker.SetTexture(0, "PositionTexture", tempPositionTexture);
-                PointCloudBaker.Dispatch(0, frameWidth / 8, frameHeight / 8, 1);
+                PointCloudBaker.SetBuffer(kernel, "PositionBuffer", positionBuffer);
+                PointCloudBaker.SetTexture(kernel, "PositionTexture", tempPositionTexture);
+                PointCloudBaker.Dispatch(kernel, frameWidth / 8, frameHeight / 8, 1);
 
                 Graphics.CopyTexture(tempPositionTexture, PointCloudMap);
             }

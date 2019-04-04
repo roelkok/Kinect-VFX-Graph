@@ -4,8 +4,8 @@
 uint2 MapDimensions;
 float BaseDepth;
 
-Buffer<uint> PositionBuffer;
-Buffer<float2> DepthToColorMap;
+StructuredBuffer<uint> PositionBuffer;
+StructuredBuffer<float2> DepthToColorMap;
 
 Texture2D<float4> ColorSource;
 
@@ -17,17 +17,17 @@ void BakeDepth(uint3 id : SV_DispatchThreadID)
 {
 	uint i = id.x + id.y * MapDimensions.x;
 	bool odd = i % 2 == 1;
-	uint depth = PositionBuffer[floor(i / 2)];
+	uint depth = PositionBuffer[floor(i * 0.5)];
 	// unpack ushort from uint
 	if (odd) {
 		depth <<= 16;
 	}
 	depth >>= 16;
-	float angle = 0;
-	float3 ray = float3(((float)id.x - (MapDimensions.x / 2)) * 0.5, ((float)id.y - (MapDimensions.y / 2)) * -0.5, BaseDepth);
+	float angle = 0.0;
+	float3 ray = float3(((float)id.x - (MapDimensions.x * 0.5)) * 0.5, ((float)id.y - (MapDimensions.y * 0.5)) * -0.5, BaseDepth);
 	ray *= depth / BaseDepth;
 
-	PositionTexture[id.xy] = float4(ray * 0.001, 1);
+	PositionTexture[id.xy] = float4(ray * 0.001, 1.0);
 }
 
 [numthreads(8, 8, 1)]
